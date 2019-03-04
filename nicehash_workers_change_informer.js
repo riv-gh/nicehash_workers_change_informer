@@ -1,10 +1,12 @@
 const BTC_WALET = '';
 const TELEGRAM_BOT_TOKEN = '';
 const TELEGRAM_CHAT_ID = '';
+
 const CHECK_INTERVAL = 10000;
 const NICEHASH_API_LINK = 'https://api.nicehash.com/api?method=stats.provider.workers&addr='+BTC_WALET;
 const TELEGRAM_MESSAGE_URL = 'https://api.telegram.org/bot'+TELEGRAM_BOT_TOKEN+'/sendMessage?chat_id='+TELEGRAM_CHAT_ID+'&text=';
 let lastWorkersCount = 0;
+let tlegramWindow = null;
 
 "https://api.nicehash.com"!=document.location.origin&&(document.location.href=NICEHASH_API_LINK);
 
