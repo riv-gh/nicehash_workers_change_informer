@@ -53,7 +53,7 @@ getJSON(NICEHASH_API_LINK,
                       (workersCount<lastWorkersCount?"Some workers are lost...":"Some workers are recovery")+
                       " \r\nActive workers:\r\n";
         for (let i=0; i<data.result.workers.length; i++) {
-          message+=""+(i+1)+". "+(!data.result.workers[i][0].length?"[no nane]":data.result.workers[i][0])+"\r\n";
+          message+=""+(i+1)+". "+(!data.result.workers[i][0].length?"[no name]":data.result.workers[i][0])+"\r\n";
         }
         console.info(message);
         sendTelegramMessage(message);
