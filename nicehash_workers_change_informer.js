@@ -50,8 +50,11 @@ getJSON(NICEHASH_API_LINK,
     } else {
       console.info('Your workers count: ' + data.result.workers.length + "; Change count: " + changeCount+";");
       let workersCount = data.result.workers.length;
-      if (workersCount!=lastWorkersCount) {
+      if ((workersCount!=lastWorkersCount) && (changeCount==0)) {
         changeCount = 1;
+      }
+      if ((workersCount==lastWorkersCount) && (changeCount<MAX_CHANGE_COUNT/2)) {
+        changeCount = 0;
       }
       if ((changeCount>0) && (workersCount==lastWorkersCount)) {
         changeCount++;
