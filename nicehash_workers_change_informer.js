@@ -2,16 +2,25 @@ const BTC_WALET = '';
 const TELEGRAM_BOT_TOKEN = '';
 const TELEGRAM_CHAT_ID = '';
 
-const CHECK_INTERVAL = 10000;
+const CHECK_INTERVAL = 15000;
 const NICEHASH_API_LINK = 'https://api.nicehash.com/api?method=stats.provider.workers&addr='+BTC_WALET;
 const TELEGRAM_MESSAGE_URL = 'https://api.telegram.org/bot'+TELEGRAM_BOT_TOKEN+'/sendMessage?chat_id='+TELEGRAM_CHAT_ID+'&text=';
-const MAX_CHANGE_COUNT = 3;
+const MAX_CHANGE_COUNT = 10;
 
 let lastWorkersCount = 0;
 let changeCount = 0; //if the worker changes the algorithm, you won’t get the message
 let tlegramWindow = null;
 
-"https://api.nicehash.com"!=document.location.origin&&(document.location.href=NICEHASH_API_LINK);
+"https://api.nicehash.com"!=document.location.origin&&(function() {
+	alert("go to url. rerun script!");
+	document.location.href=NICEHASH_API_LINK;return 0;
+}());
+
+if ( !BTC_WALET.length || !TELEGRAM_BOT_TOKEN.length || !TELEGRAM_CHAT_ID.length ) {
+  alert('required data!!!');
+  document.location.reload(true);
+}
+
 
 function getJSON(url, callback) {
   let xhr = new XMLHttpRequest();
@@ -39,7 +48,7 @@ getJSON(NICEHASH_API_LINK,
     if (err !== null) {
       console.error('Something went wrong: ' + err);
     } else {
-      console.info('Your workers count: ' + data.result.workers.length);
+      console.info('Your workers count: ' + data.result.workers.length + "; Change count: " + changeCount+";");
       let workersCount = data.result.workers.length;
       if (workersCount!=lastWorkersCount) {
         changeCount = 1;
