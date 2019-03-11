@@ -1,5 +1,5 @@
 const BTC_WALET = '';
-const TELEGRAM_BOT_TOKEN = ';
+const TELEGRAM_BOT_TOKEN = '';
 const TELEGRAM_CHAT_ID = '';
 
 const CHECK_INTERVAL = 60000;
